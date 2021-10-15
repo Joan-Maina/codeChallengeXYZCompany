@@ -1,5 +1,8 @@
 const items = document.getElementById('items');
 const show = document.getElementById('show');
+let counter = 0;
+
+
 
 let beds = [
     {
@@ -48,16 +51,22 @@ function createItem(beds) {
         let name = document.createElement("h5");
         let description = document.createElement('p');
         let btn = document.createElement('button');
+        btn.classList.add("addToCart")
+        
+
 
         bedImage.classList.add('bedImage');
         singleItem.classList.add('singleItem');
-        btn.classList.add('addToCart');
+        btn.setAttribute('id', bed.id);
+       
+        
 
         description.innerText = bed.description;
         name.innerText = bed.name;
         price.innerText = bed.price;
+        btn.innerHTML = 'add to cart'; 
         bedImage.src = bed.image;
-        btn.innerHTML = 'add to cart';
+        
 
         singleItem.appendChild(bedImage);
         singleItem.appendChild(price);
@@ -66,13 +75,48 @@ function createItem(beds) {
         singleItem.appendChild(btn);
        // singleItem.appendChild(description);
         items.appendChild(singleItem);
-
+       
+        
+        
     });
 }
 
-items.addEventListener('click', function () {
-    console.log('joan');
-});
 createItem(beds);
+
+
+
+let allBtn = document.querySelectorAll('.addToCart');
+console.log(allBtn);
+allBtn.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+        let addtoCartDiv = document.createElement("div")
+    let add = document.createElement('button');
+    let minus = document.createElement('minus');
+    let quantity = document.createElement('span'); 
+    
+        add.innerHTML = '+';
+        minus.innerHTML = '-';
+        quantity.innerText = counter;
+
+        add.classList.add('addQuantity');
+        minus.classList.add('reduceQuantity');
+        quantity.classList.add('quantity');
+        addtoCartDiv.appendChild(add);
+        addtoCartDiv.appendChild(quantity);
+        addtoCartDiv.appendChild(minus);
+        
+        btn.parentNode.appendChild(addtoCartDiv)
+
+        addtoCartDiv.addEventListener("mouseout", (e)=>{
+            if (!addtoCartDiv.contains(e.relatedTarget)) {
+                addtoCartDiv.parentNode.removeChild(addtoCartDiv);
+            }
+        })
+    })
+})
+
+
+
+
 
 

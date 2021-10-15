@@ -1,6 +1,16 @@
 body {
   height: 100;
 }
+.main-container {
+  /* display: flex;
+  flex-direction: row; */
+}
+.addToCart {
+  /* .quantity{
+  display: block;
+}   */
+  display: block;
+}
 .hero-text {
   text-align: center;
   top: 30%;
@@ -8,6 +18,17 @@ body {
   color: black;
   position: absolute;
   font-size: 35px;
+}
+.topNav {
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+p {
+  font-style: italic;
+  font-size: large;
 }
 button {
   background-color: black;
@@ -43,6 +64,7 @@ button {
   border: 1px solid black;
   padding: 20px;
   box-shadow: 2px 2px 2px 2px rgb(124, 109, 109);
+  margin-bottom: 20px;
 }
 .hero-section {
   height: 100vh;
