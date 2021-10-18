@@ -2,8 +2,6 @@ const items = document.getElementById('items');
 const show = document.getElementById('show');
 let counter = 0;
 
-
-
 let beds = [
     {
         id:1,
@@ -86,34 +84,76 @@ createItem(beds);
 
 
 let allBtn = document.querySelectorAll('.addToCart');
-console.log(allBtn);
+// console.log(allBtn);
+//addtocart button onclick
 allBtn.forEach(btn=>{
     btn.addEventListener("click", ()=>{
+        
+        
+        //create quantity div
         let addtoCartDiv = document.createElement("div")
-    let add = document.createElement('button');
-    let minus = document.createElement('minus');
-    let quantity = document.createElement('span'); 
+        let add = document.createElement('button');
+        let minus = document.createElement('button');
+        let quantity = document.createElement('span'); 
     
+        //input text on quantity div
         add.innerHTML = '+';
         minus.innerHTML = '-';
         quantity.innerText = counter;
 
+        //give classnames to quantity div
         add.classList.add('addQuantity');
         minus.classList.add('reduceQuantity');
         quantity.classList.add('quantity');
-        addtoCartDiv.appendChild(add);
-        addtoCartDiv.appendChild(quantity);
+        addtoCartDiv.classList.add('defineQuantity');
+
+            
         addtoCartDiv.appendChild(minus);
+        addtoCartDiv.appendChild(quantity);
+        addtoCartDiv.appendChild(add);
+         btn.parentNode.appendChild(addtoCartDiv);
+    
+        let quantityText = document.querySelector('.quantity');
+       
+        let ADDBTN = document.querySelectorAll('.addQuantity');
+
+        ADDBTN.forEach(adding=>{
+         
+         adding.addEventListener('click', () => {
+       counter++;
+        quantityText.innerText = counter;
+        // console.log(counter)
+        show.innerText = counter; 
         
-        btn.parentNode.appendChild(addtoCartDiv)
+    })
+   
+    })
+    let MINUSBTN = document.querySelectorAll('.reduceQuantity');
+    MINUSBTN.forEach(reducing =>{
+        reducing.addEventListener('click', () => {
+            if(counter == 0){
+                counter = 0
+            }
+            else{
+                counter--;
+                quantityText.innerText = counter;
+                show.innerText = counter; 
+            }
+         })
+})
 
         addtoCartDiv.addEventListener("mouseout", (e)=>{
             if (!addtoCartDiv.contains(e.relatedTarget)) {
                 addtoCartDiv.parentNode.removeChild(addtoCartDiv);
+               
+                // counter = 0;
             }
         })
     })
+
+  
 })
+
 
 
 
