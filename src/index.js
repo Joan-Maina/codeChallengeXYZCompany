@@ -1,7 +1,13 @@
-const items = document.getElementById('items');
-const show = document.getElementById('show');
-let counter = 0;
+//ensure localstorage is cleared 
+//once the page is refreshed
+localStorage.removeItem("cartItems")
 
+const items = document.getElementById('items');
+//count of each product
+let counter = 0;
+//items in cart
+let selectedItems = {};
+//array of products
 let beds = [
     {
         id:1,
@@ -40,6 +46,7 @@ let beds = [
     }
 ];
 
+//display beds in tiles
 function createItem(beds) {
     beds.map(bed => {
         
@@ -49,10 +56,9 @@ function createItem(beds) {
         let name = document.createElement("h5");
         let description = document.createElement('p');
         let btn = document.createElement('button');
-        btn.classList.add("addToCart")
-        
 
 
+        btn.classList.add("addToCart");
         bedImage.classList.add('bedImage');
         singleItem.classList.add('singleItem');
         btn.setAttribute('id', bed.id);
@@ -75,21 +81,20 @@ function createItem(beds) {
         items.appendChild(singleItem);
        
         
-        
     });
 }
 
 createItem(beds);
 
-
-
+//addtocart button and onclick
 let allBtn = document.querySelectorAll('.addToCart');
 // console.log(allBtn);
-//addtocart button onclick
+
 allBtn.forEach(btn=>{
+
     btn.addEventListener("click", ()=>{
-        
-        
+        let key = btn.id;
+     
         //create quantity div
         let addtoCartDiv = document.createElement("div")
         let add = document.createElement('button');
@@ -107,56 +112,105 @@ allBtn.forEach(btn=>{
         quantity.classList.add('quantity');
         addtoCartDiv.classList.add('defineQuantity');
 
-            
+            //append to quantity
         addtoCartDiv.appendChild(minus);
         addtoCartDiv.appendChild(quantity);
         addtoCartDiv.appendChild(add);
-         btn.parentNode.appendChild(addtoCartDiv);
+        btn.parentNode.appendChild(addtoCartDiv);
     
         let quantityText = document.querySelector('.quantity');
        
         let ADDBTN = document.querySelectorAll('.addQuantity');
-
+        
+        let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+        if((cartItems != null || cartItems != undefined) && cartItems.hasOwnProperty(key)){
+           // quantityText.innerText = counter;
+           counter = cartItems[key].amount;
+        }else{
+            counter = 0    
+        }
+        //addQuantity buttons
         ADDBTN.forEach(adding=>{
          
-         adding.addEventListener('click', () => {
-       counter++;
+        adding.addEventListener('click', () => {
+        counter++;
         quantityText.innerText = counter;
-        // console.log(counter)
-        show.innerText = counter; 
-        
+
+               //function to increment counter in local storage
+        plusBed(key);
+        console.log(localStorage.getItem("cartItems"))
+        })
     })
-   
-    })
+
+
+
+    //minus button
     let MINUSBTN = document.querySelectorAll('.reduceQuantity');
     MINUSBTN.forEach(reducing =>{
         reducing.addEventListener('click', () => {
             if(counter == 0){
-                counter = 0
+                counter = 0;
             }
             else{
-                counter--;
+                 counter--;
                 quantityText.innerText = counter;
-                show.innerText = counter; 
+                minusBed(key);
+                
             }
          })
 })
 
+//mouseout cause disappearance
         addtoCartDiv.addEventListener("mouseout", (e)=>{
             if (!addtoCartDiv.contains(e.relatedTarget)) {
                 addtoCartDiv.parentNode.removeChild(addtoCartDiv);
-               
-                // counter = 0;
+                counter= 0
             }
         })
     })
 
-  
+    
 })
 
+//addQuantity function for localstorage
+function plusBed(key) {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
 
+    if(cartItems == null || cartItems == undefined){
+        cartItems = {
+            [key]:{
+                id: key,
+                name: beds[key-1].name,
+                price: beds[key-1].price,
+                amount: counter
+        }}
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }else{
 
+        
+        if (cartItems.hasOwnProperty(key)) {
+           
+            cartItems[key].amount = counter;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        } 
+        else 
+        {
+            cartItems[key] = {
+                id: key,
+                name: beds[key-1].name,
+                price: beds[key-1].price,
+                amount: counter
+            }
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }
+}
+//reduce quantity in local storage
+function minusBed(key) {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
 
+        cartItems[key].amount = counter;
+       localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        console.log(localStorage.getItem("cartItems"))
 
-
-
+}

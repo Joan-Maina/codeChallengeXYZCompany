@@ -1,0 +1,13 @@
+.singleSelectedItem {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.RemoveFromCart {
+  border: 1px solid black;
+  padding: 30px;
+  box-shadow: 2px 2px 2px 2px rgb(124, 109, 109);
+  margin-bottom: 20px;
+}
