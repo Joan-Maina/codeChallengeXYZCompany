@@ -47,6 +47,8 @@ let beds = [
 //      return beds.filter(bed => bed.id == displayItem[0])
 // })
 let totalprice = 0;
+let totalpricefinal =0;
+let totaldiscount = 0;
 let totalamount = 0;
 for(const key in objectified){
 
@@ -57,8 +59,8 @@ for(const key in objectified){
     let singleSelectedItem = document.createElement("div");
     let selectedId = document.createElement("h4");
     let selectedPrice = document.createElement("h3");
-    let selectedAmount = document.createElement("h2");
-    let selectedTotalPrice = document.createElement("h5");
+    let selectedAmount = document.createElement("h3");
+    let selectedTotalPrice = document.createElement("h4");
 
     singleSelectedItem.classList.add('singleSelectedItem');
     selectedId.innerText = objectified[key].id;
@@ -75,22 +77,33 @@ for(const key in objectified){
     cart.appendChild(singleSelectedItem);
  
     let totalPrice = document.getElementById('totalPrice');
-    
+    let totalDiscount = document.getElementById('totalDiscount');
     let totalAmount = document.getElementById('totalAmount');
+    let grandTotal = document.getElementById('grandTotal')
     totalAmount.innerText = totalamount;
+    
 
 if(totalamount >= 9 && totalamount <= 26){
-    totalprice -= (totalamount*.10);
-    totalPrice.innerText = totalprice;
+   totalpricefinal = (totalprice -= (totalamount*.10)) ;
+    totaldiscount = totalprice - totalpricefinal;
+    totalDiscount.innerText = totaldiscount;
+    grandTotal.innerText = totalprice
+    totalPrice.innerText = totalpricefinal;
 }
 else if(totalamount <= 50 && totalamount >= 25){
-   totalprice -= (totalamount*.25);
-   totalPrice.innerText = totalprice;
+   totalpricefinal = (totalprice -= (totalamount*.25));
+   totalDiscount.innerText = (totalprice - totalpricefinal);
+   grandTotal.innerText = totalprice
+   totalPrice.innerText = totalpricefinal;
 }else if(totalamount >= 50){
-    totalprice -= (totalamount*.50);
-    totalPrice.innerText = totalprice;
+    totalpricefinal = ( totalprice -= (totalamount*.50));
+    totalDiscount.innerText = (totalprice - totalpricefinal);
+    totalPrice.innerText = totalpricefinal;
+    grandTotal.innerText = totalprice;
 }else{
     totalprice = totalprice;
+    totalDiscount.innerText = totaldiscount;
+    grandTotal.innerText = totalprice
     totalPrice.innerText = totalprice;
 }
 

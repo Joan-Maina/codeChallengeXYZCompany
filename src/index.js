@@ -11,35 +11,35 @@ let selectedItems = {};
 let beds = [
     {
         id:1,
-        image:'bed1.jpg',
+        image:'bedd.jpg',
         price: 200,
         name:'queen',
         description:'5 by 6'
     },
     {
         id:2,
-        image:'bed1.jpg',
+        image:'bed2.jpg',
         price: 300,
         name:'king',
         description:'3 by 6'
     },
     {
         id:3,
-        image:'bed1.jpg',
+        image:'bed3.jpg',
         price: 400,
         name:'king',
         description:'2 by 6'
     },
     {
         id:4,
-        image:'bed1.jpg',
+        image:'bed4.jpg',
         price: 500,
         name:'queen',
         description:'3 by 6'
     },
     {
         id:5,
-        image:'bed1.jpg',
+        image:'bed5.jpg',
         price: 600,
         name:'king',
         description:'4 by 6'
