@@ -12,35 +12,35 @@ let beds = [
     {
         id:1,
         image:'bedd.jpg',
-        price: 200,
+        price: 20000,
         name:'queen',
         description:'5 by 6'
     },
     {
         id:2,
         image:'bed2.jpg',
-        price: 300,
+        price: 30000,
         name:'king',
         description:'3 by 6'
     },
     {
         id:3,
         image:'bed3.jpg',
-        price: 400,
+        price: 40000,
         name:'king',
         description:'2 by 6'
     },
     {
         id:4,
         image:'bed4.jpg',
-        price: 500,
+        price: 50000,
         name:'queen',
         description:'3 by 6'
     },
     {
         id:5,
         image:'bed5.jpg',
-        price: 600,
+        price: 60000,
         name:'king',
         description:'4 by 6'
     }

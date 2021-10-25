@@ -1,58 +1,15 @@
  let cartItems = localStorage.getItem('cartItems');
 
 let objectified = JSON.parse(cartItems)
- console.log(objectified)
-
-
-let beds = [
-    {
-        id:1,
-        image:'bed1.jpg',
-        price: 200,
-        name:'queen',
-        description:'5 by 6'
-    },
-    {
-        id:2,
-        image:'bed1.jpg',
-        price: 300,
-        name:'king',
-        description:'3 by 6'
-    },
-    {
-        id:3,
-        image:'bed1.jpg',
-        price: 400,
-        name:'king',
-        description:'2 by 6'
-    },
-    {
-        id:4,
-        image:'bed1.jpg',
-        price: 500,
-        name:'queen',
-        description:'3 by 6'
-    },
-    {
-        id:5,
-        image:'bed1.jpg',
-        price: 600,
-        name:'king',
-        description:'4 by 6'
-    }
-];
-// console.log(Object.keys(stringified))
-//  const cartDisplay = Object.keys(stringified).map(displayItem => {
-//     //  return console.log(displayItem[0].price)
-//      return beds.filter(bed => bed.id == displayItem[0])
-// })
+ 
 let totalprice = 0;
 let totalpricefinal =0;
 let totaldiscount = 0;
 let totalamount = 0;
+
 for(const key in objectified){
 
-    console.log(objectified[key].price)
+    console.log(objectified[key].amount)
 
     let cart = document.getElementById('selectedItemsDiv');
     
@@ -66,7 +23,7 @@ for(const key in objectified){
     selectedId.innerText = objectified[key].id;
     selectedPrice.innerText = objectified[key].price;
     selectedTotalPrice.innerText = (objectified[key].price * objectified[key].amount);
-    totalprice += (objectified[key].price * objectified[key].amount)
+    totalprice += (objectified[key].price * objectified[key].amount);
     selectedAmount.innerText = objectified[key].amount;
     totalamount += objectified[key].amount;
 
@@ -84,101 +41,28 @@ for(const key in objectified){
     
 
 if(totalamount >= 9 && totalamount <= 26){
-   totalpricefinal = (totalprice -= (totalamount*.10)) ;
-    totaldiscount = totalprice - totalpricefinal;
+    grandTotal.innerText = totalprice;
+    totaldiscount = (totalprice*.10);
+   totalpricefinal = (totalprice -totaldiscount) ;
     totalDiscount.innerText = totaldiscount;
-    grandTotal.innerText = totalprice
     totalPrice.innerText = totalpricefinal;
 }
-else if(totalamount <= 50 && totalamount >= 25){
-   totalpricefinal = (totalprice -= (totalamount*.25));
-   totalDiscount.innerText = (totalprice - totalpricefinal);
-   grandTotal.innerText = totalprice
+else if(totalamount >= 25 && totalamount <= 50){
+    grandTotal.innerText = totalprice;
+    totaldiscount = totalprice * .25;
+   totalpricefinal = (totalprice - totaldiscount);
+   totalDiscount.innerText = totaldiscount;
    totalPrice.innerText = totalpricefinal;
 }else if(totalamount >= 50){
-    totalpricefinal = ( totalprice -= (totalamount*.50));
-    totalDiscount.innerText = (totalprice - totalpricefinal);
-    totalPrice.innerText = totalpricefinal;
     grandTotal.innerText = totalprice;
-}else{
-    totalprice = totalprice;
+    totaldiscount = (totalprice*.50)
+    totalpricefinal = ( totalprice  - totaldiscount);
     totalDiscount.innerText = totaldiscount;
-    grandTotal.innerText = totalprice
+    totalPrice.innerText = totalpricefinal;
+}else{
+    grandTotal.innerText = totalprice;
+    totalDiscount.innerText = 0;
     totalPrice.innerText = totalprice;
 }
 
 }
-
-// let joan  = document.getElementById('joan');
-// console.log(joan.innerText)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //CART
-// let cart = document.getElementById('selectedItemsDiv');
-
-
-// function createSelectedItem(cartDisplay) {
-//     cartDisplay.forEach(selectedItem => {
-        
-//         let singleSelectedItem = document.createElement("div");
-//         let bedSelectedImage = document.createElement('img');
-//         let Selectedprice = document.createElement("h4");
-//         let nameSelected = document.createElement("h5");
-//         let descriptionSelected = document.createElement('p');
-//         let btnSelected = document.createElement('button');
-//         btnSelected.classList.add("RemoveFromCart")
-        
-
-
-//         // let bedSelectedImage = document.createElement('img');
-//         bedSelectedImage.classList.add('bedSelectedImage');
-//         singleSelectedItem.classList.add('singleSelectedItem');
-//         btnSelected.setAttribute('id', selectedItem.id);
-       
-        
-
-//         descriptionSelected.innerText = selectedItem.description;
-//         nameSelected.innerText = selectedItem.name;
-//         // let Selectedprice = document.createElement("h4");
-//         Selectedprice.innerText = selectedItem.price;
-//         btnSelected.innerHTML = 'remove from cart'; 
-//         bedSelectedImage.src = selectedItem.image;
-        
-
-//         singleSelectedItem.appendChild(bedSelectedImage);
-//         singleSelectedItem.appendChild(Selectedprice);
-//         singleSelectedItem.appendChild(nameSelected);
-//         singleSelectedItem.appendChild(descriptionSelected);
-//         singleSelectedItem.appendChild(btnSelected);
-//        // singleItem.appendChild(description);
-//         cart.appendChild(singleSelectedItem);
-       
-        
-//     });
-// }
-
-// createSelectedItem(stringified);
-
-
-
-
-
-
-
